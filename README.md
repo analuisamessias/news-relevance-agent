@@ -63,18 +63,6 @@ Responsável por:
 
 ## Datasets
 
-Dataset principal:
-
-- MIND — Microsoft News Dataset
-
-Dataset opcional para comparação:
-
-- Adressa Dataset
-
-Além disso:
-
-- Pequeno conjunto de dados anotado manualmente pelo grupo
-
 ---
 
 ## Objetivos
@@ -87,15 +75,6 @@ Além disso:
 ---
 
 ## Estrutura do Repositório
-
-```txt
-src/
- ├── agents/
- ├── pipeline/
- ├── evaluation/
- ├── knowledge_base/
- └── utils/
-```
 
 ---
 
