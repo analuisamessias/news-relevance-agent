@@ -72,6 +72,13 @@ Arquivos utilizados:
 - `MINDlarge_train.zip`: split de treino da versão grande;
 - `MINDlarge_dev.zip`: split de validação/desenvolvimento da versão grande.
 
+Diferenças entre os datasets:
+
+- `MINDsmall`: menor volume, ideal para prototipação, debug e iteração rápida.
+- `MINDlarge`: maior volume, ideal para experimentos completos e avaliação final.
+- `train`: base principal para construção e ajuste do pipeline.
+- `dev`: base de validação para análise exploratória de desempenho.
+
 Para evitar versionar arquivos grandes no Git, os datasets devem ser baixados via script.
 
 1. Crie e ative um ambiente virtual:
@@ -92,6 +99,14 @@ pip install -r requirements.txt
 ```bash
 python3 scripts/download_data.py
 ```
+
+## Concept Documentation
+
+The conceptual and annotation references are in:
+
+- `docs/methodology/informativeness-classification-criteria.md` (canonical English criteria for pipeline/agents)
+- `docs/methodology/informativeness-classification-criteria-pt.md` (Portuguese reference version)
+- `docs/methodology/manual-annotation-protocol.md` (manual annotation sampling protocol)
 
 
 ## Objetivos
