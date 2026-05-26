@@ -1,0 +1,6 @@
+.idea/
+.venv/
+data/MINDlarge_dev/
+data/MINDlarge_train/
+data/MINDsmall_dev/
+data/MINDsmall_train/
