@@ -63,7 +63,36 @@ Responsável por:
 
 ## Datasets
 
----
+Os dados usados no projeto vêm do MIND e são baixados automaticamente para `data/`.
+
+Arquivos utilizados:
+
+- `MINDsmall_train.zip`: split de treino da versão pequena;
+- `MINDsmall_dev.zip`: split de validação/desenvolvimento da versão pequena;
+- `MINDlarge_train.zip`: split de treino da versão grande;
+- `MINDlarge_dev.zip`: split de validação/desenvolvimento da versão grande.
+
+Para evitar versionar arquivos grandes no Git, os datasets devem ser baixados via script.
+
+1. Crie e ative um ambiente virtual:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+2. Instale as dependências:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Baixe todos os arquivos da pasta compartilhada para `data/` (o script também extrai os `.zip` automaticamente):
+
+```bash
+python3 scripts/download_data.py
+```
+
 
 ## Objetivos
 
@@ -84,25 +113,3 @@ Ana Luisa Mendes, Clara Tavares, Laura Oliveira e Leticia Scofield
 
 Projeto desenvolvido para a disciplina de Projeto de Agentes de Inteligência Artificial (2026/1) do curso de Ciência da Computação da Universidade Federal de Minas Gerais (UFMG).
 
-## Datasets
-
-Para evitar versionar arquivos grandes no Git, os datasets devem ser baixados via script.
-
-1. Crie e ative um ambiente virtual:
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-2. Instale as dependências:
-
-```bash
-pip install -r requirements.txt
-```
-
-3. Baixe todos os arquivos da pasta compartilhada para `data/` (o script tambem extrai os `.zip` automaticamente):
-
-```bash
-python3 scripts/download_data.py
-```
