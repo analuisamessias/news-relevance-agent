@@ -9,19 +9,16 @@ from estado import EstadoPipeline
 from langgraph.graph import END, START, StateGraph
 
 from agents.agent_estruturador import no_agente_1_estruturador
-
-# from agents.agent_recuperador import no_agente_2_recuperador
+from agents.agent_recuperador import no_agente_2_recuperador
 
 workflow = StateGraph(EstadoPipeline)
 
 workflow.add_node("Agente_1_Estruturador", no_agente_1_estruturador)
-# workflow.add_node("Agente_2_Recuperador", no_agente_2_recuperador)
+workflow.add_node("Agente_2_Recuperador", no_agente_2_recuperador)
 
 workflow.add_edge(START, "Agente_1_Estruturador")
-# workflow.add_edge("Agente_1_Estruturador", "Agente_2_Recuperador")
-# workflow.add_edge("Agente_2_Recuperador", END)
-
-workflow.add_edge("Agente_1_Estruturador", END)
+workflow.add_edge("Agente_1_Estruturador", "Agente_2_Recuperador")
+workflow.add_edge("Agente_2_Recuperador", END)
 
 pipeline_compilado = workflow.compile()
 
@@ -81,12 +78,14 @@ if __name__ == "__main__":
     for i, item in enumerate(noticias, 1):
         news_id = item["news_id"]
         classificacao_manual = item["classificacao_manual"]
-        entrada = {"noticia_original": item["noticia_original"]}
+        noticia = item["noticia_original"]
+        entrada = {"noticia_original": noticia}
 
         print(
-            f"[{i}/{len(noticias)}] {news_id} | categoria: {item['noticia_original']['categoria']}"
+            f"[{i}/{len(noticias)}] {news_id} | "
+            f"categoria: {noticia['categoria']}"
         )
-        print(f"  Título: {item['noticia_original']['titulo'][:80]}...")
+        print(f"  Título: {noticia['titulo'][:80]}...")
 
         resultado = pipeline_compilado.invoke(entrada)
         estruturado = resultado.get("representacao_estruturado", {})
@@ -94,12 +93,22 @@ if __name__ == "__main__":
         exemplos = recuperado.get("exemplos", [])
 
         fatual = estruturado.get("elementos_factuais") or []
+        fatual_txt = fatual if fatual else "(nenhum)"
+        acrescenta = estruturado.get("resumo_acrescenta_info")
+        apelo = estruturado.get("sinais_apelo_superficial")
         print(
             f"  Agente 1 →  tema: {estruturado.get('tema')}\n"
             f"             linguagem: {estruturado.get('tipo_linguagem')} | "
-            f"elementos_factuais: {fatual if fatual else '(nenhum)'}\n"
-            f"             resumo acrescenta: {estruturado.get('resumo_acrescenta_info')} | "
-            f"apelo superficial: {estruturado.get('sinais_apelo_superficial')}\n"
+            f"elementos_factuais: {fatual_txt}\n"
+            f"             resumo acrescenta: {acrescenta} | "
+            f"apelo superficial: {apelo}\n"
         )
+
+        print(f"  Agente 2 →  {len(exemplos)} exemplos recuperados:")
+        for ex in exemplos:
+            print(
+                f"             [{ex.get('news_id')}] "
+                f"{ex.get('classification')} | {ex.get('title', '')[:60]}"
+            )
 
         print()
