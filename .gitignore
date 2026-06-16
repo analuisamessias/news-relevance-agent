@@ -1,4 +1,5 @@
 .idea/
+.env
 .venv/
 data/MINDlarge_dev/
 data/MINDlarge_train/
