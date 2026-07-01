@@ -10,3 +10,7 @@ class EstadoPipeline(TypedDict):
     contexto_formatado: str
 
     decisao_final: dict
+
+    verificacao: dict
+
+    comparacao: dict
