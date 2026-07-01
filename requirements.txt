@@ -1,3 +1,26 @@
-gdown>=5.2.0
+# Configuração
 python-dotenv
+
+# Pipeline de agentes
 langgraph>=0.1.0
+langchain
+langchain-core
+langchain-chroma
+
+# Banco vetorial
+chromadb
+
+# IA
+pydantic
+requests
+
+# Manipulação de dados
+pandas
+
+# Métricas
+scikit-learn
+
+# Interface
+streamlit
+
+gdown
